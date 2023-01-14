@@ -1,23 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {Home , Questions} from './Components/index'
+
+/**
+ * when user start 
+ * we should get questions from api into  questions state the pass them down to the questions components 
+ */
 
 function App() {
+  const [start ,setStart] = React.useState(false)
+  
+
+
+
+
+   {/** Starts the Quiz */}
+  const  startQuiz = () => {
+    setStart(prev => !prev)
+  }
+   
+  {/** Ends the Quiz */}
+  function endGame(){
+    setStart(prev => !prev)
+  }
+  
+
   return (
+    // render home if quiz theres no quiz id there is quiz render questions
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      {
+       start ?
+       <Questions 
+       start={start}
+       endGame={endGame}
+       />
+        :
+        <Home 
+       
+        startQuiz={startQuiz}
+        
+        />
+
+      }
     </div>
   );
 }
